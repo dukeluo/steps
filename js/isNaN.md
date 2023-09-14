@@ -1,5 +1,5 @@
 ---
-title: `isNaN()` vs `Number.isNaN()`
+title: isNaN() vs Number.isNaN()
 category: javascript
 tags: [number]
 dateCreated: 2023-09-14
