@@ -1,5 +1,5 @@
 ---
-title: for statement
+title: for statement with multiple loop counters
 category: javascript
 tags: [syntax]
 dateCreated: 2023-09-21
