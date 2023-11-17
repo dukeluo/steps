@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "action": "pnpm --filter @steps/upload-action",
+    "build": "pnpm --recursive --parallel --stream run build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,9 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@steps/eslint-config": "workspace:^",
+    "eslint": "^8.53.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.2.2"
   }
 }

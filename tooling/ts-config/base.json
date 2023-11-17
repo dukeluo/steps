@@ -4,12 +4,6 @@
     "target": "ES2015",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "rootDir": "src",
-    "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"]
-    },
     "sourceMap": true,
     "noEmit": true,
     "noImplicitAny": true,
