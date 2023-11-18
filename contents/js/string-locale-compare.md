@@ -6,7 +6,8 @@ dateCreated: 2023-09-15
 dateModified:
 ---
 
-The `localeCompare()` method of `String` values returns a number indicating whether this string comes before, or after, or is the same as the given string in sort order.
+The `localeCompare()` method of `String` values returns a number indicating whether this string comes before, or after,
+or is the same as the given string in sort order.
 
 ```javascript
 "a".localeCompare("c"); // -1

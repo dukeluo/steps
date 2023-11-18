@@ -11,4 +11,5 @@ dateModified:
 - Same inputs, same output.
 - It minds its own business.
 
-When developing React application in "Strict Mode", React calls each component’s function twice, which can help surface mistakes caused by impure functions.
+When developing React application in "Strict Mode", React calls each component’s function twice, which can
+help surface mistakes caused by impure functions.

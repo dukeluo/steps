@@ -6,7 +6,9 @@ dateCreated: 2023-09-23
 dateModified:
 ---
 
-In rare cases, you might need to catch all events on child elements, even if they stopped propagation. For example, maybe you want to log every click to analytics, regardless of the propagation logic. You can do this by adding `Capture` at the end of the event name:
+In rare cases, you might need to catch all events on child elements, even if they stopped propagation. For example,
+maybe you want to log every click to analytics, regardless of the propagation logic. You can do this by adding `Capture`
+at the end of the event name:
 
 ```javascript
 <div
