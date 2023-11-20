@@ -1,0 +1,12 @@
+name: 'upload-action'
+description: 'GitHub Actions for uploading steps to Vercel Storage'
+author: Huan Luo <dukeluo@outlook.com> (https://shaiwang.life)
+
+inputs:
+  path:
+    description: 'A glob pattern specifying the path to steps'
+    required: true
+
+runs:
+  using: node20
+  main: dist/index.js
