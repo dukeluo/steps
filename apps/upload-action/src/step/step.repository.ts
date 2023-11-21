@@ -25,9 +25,7 @@ export async function findStepByHashDigest(
 }
 
 export async function findAllSteps(db: Kysely<PostgresDatabase>): Promise<StepRow[]> {
-  const steps = await db.selectFrom('step').selectAll('step').execute()
-
-  return steps
+  return await db.selectFrom('step').selectAll().execute()
 }
 
 export async function deleteStepsByIds(db: Kysely<PostgresDatabase>, ids: string[]): Promise<void> {

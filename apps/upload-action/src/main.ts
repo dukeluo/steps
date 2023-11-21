@@ -1,4 +1,4 @@
-import { debug, getInput, setFailed } from '@actions/core'
+import { debug, getInput, info, setFailed } from '@actions/core'
 import { createKysely } from '@vercel/postgres-kysely'
 
 import { PostgresDatabase } from '~/postgres.storage'
@@ -10,14 +10,15 @@ export async function run(): Promise<void> {
     const db = createKysely<PostgresDatabase>()
     const [toBeAdded, toBeDeleted] = await createActions(db, pathPattern)
 
-    debug(`Files need to be inserted: ${JSON.stringify(toBeAdded)}`)
-    debug(`Files need to be deleted: ${JSON.stringify(toBeDeleted)}`)
+    info(`Steps will be inserted: ${JSON.stringify(toBeAdded)}`)
+    info(`Steps will be deleted: ${JSON.stringify(toBeDeleted)}`)
 
     await addSteps(db, toBeAdded)
     await deleteSteps(db, toBeDeleted)
-  } catch (error) {
-    if (error instanceof Error) {
-      setFailed(error.message)
+  } catch (e) {
+    if (e instanceof Error) {
+      debug(e.stack ?? '')
+      setFailed(e.message)
     }
   }
 }
