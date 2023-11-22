@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 
 import { del, put } from '@vercel/blob'
 import { Kysely } from 'kysely'
-import { match } from 'micromatch'
+import micromatch from 'micromatch'
 import parseMD from 'parse-md'
 
 import { PostgresDatabase } from '~/postgres.storage'
@@ -37,7 +37,7 @@ export async function createActions(
   pathPattern: string
 ): Promise<[AddStepAction[], DeleteStepAction[]]> {
   const steps = await findAllSteps(db)
-  const matched = match(readdirSync(resolve('./')), pathPattern)
+  const matched = micromatch.match(readdirSync(resolve('./')), pathPattern)
   const noModified = []
   const toBeAdded: AddStepAction[] = []
   const toBeDeleted: DeleteStepAction[] = []
