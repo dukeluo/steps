@@ -13,6 +13,9 @@ jobs:
   upload-steps:
     runs-on: ubuntu-latest
     environment: production
+    env:
+      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,12 +33,12 @@ jobs:
         run: pnpm install
 
       - name: Build upload action
-        run: pnpm run build
+        run: pnpm action build
+
+      - name: Migrate Database
+        run: pnpm action migrate
 
       - name: Run upload action
         uses: ./apps/upload-action
-        env:
-          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
-          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
         with:
           path: contents/**/*.md

@@ -26,6 +26,9 @@ class FileMigrationProvider {
 async function migrateToLatest() {
   const db = createKysely()
 
+  // https://github.com/vercel/storage/issues/325#issuecomment-1680858882
+  Object.defineProperty(db.getExecutor().adapter, 'supportsTransactionalDdl', () => false)
+
   const migrator = new Migrator({
     db,
     provider: new FileMigrationProvider(resolve('./migrations')),
