@@ -85,6 +85,8 @@ export async function createActions(
 }
 
 export async function addSteps(db: Kysely<PostgresDatabase>, actions: AddStepAction[]) {
+  if (!actions.length) return
+
   for (const action of actions) {
     const content = readFileSync(action.pathname, 'utf8')
     const { url } = await put(action.pathname, content, { access: 'public' })
@@ -104,6 +106,8 @@ export async function addSteps(db: Kysely<PostgresDatabase>, actions: AddStepAct
 }
 
 export async function deleteSteps(db: Kysely<PostgresDatabase>, actions: DeleteStepAction[]) {
+  if (!actions.length) return
+
   await deleteStepsByIds(
     db,
     actions.map((action) => action.id)
