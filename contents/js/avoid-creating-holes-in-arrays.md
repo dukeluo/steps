@@ -16,12 +16,12 @@ to it. This ensures that the array remains packed and doesn't transition to a ho
 
 ```javascript
 // using literals
-const array = ["a", "b", "c"]; // elements kind: PACKED_ELEMENTS
+const array = ['a', 'b', 'c'] // elements kind: PACKED_ELEMENTS
 
 // creating an empty array and later put the values
-const array = [];
-array.push(someValue);
-array.push(someOtherValue);
+const array = []
+array.push(someValue)
+array.push(someOtherValue)
 ```
 
 By following this approach, you allow V8 to potentially generate optimized code that is faster for operations performed

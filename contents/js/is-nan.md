@@ -15,15 +15,15 @@ There are two `isNaN()` functions:
 And `Number.isNaN()` doesn't attempt to convert the parameter to a number, so non-numbers always return `false`.
 
 ```javascript
-isNaN(NaN); //true
-Number.isNaN(NaN); // true
+isNaN(NaN) //true
+Number.isNaN(NaN) // true
 
-isNaN(123); // false
-Number.isNaN(123); // false
+isNaN(123) // false
+Number.isNaN(123) // false
 
-isNaN("123"); // false
-Number.isNaN("123"); // false
+isNaN('123') // false
+Number.isNaN('123') // false
 
-isNaN("abc"); // true
-Number.isNaN("abc"); // false
+isNaN('abc') // true
+Number.isNaN('abc') // false
 ```

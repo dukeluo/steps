@@ -6,7 +6,7 @@
     "action": "pnpm --filter @steps/upload-action",
     "build": "pnpm --recursive --parallel --stream run build",
     "lint": "eslint . && markdownlint-cli2 contents/**/*.md",
-    "lint:fix": "eslint . --fix && markdownlint-cli2 contents/**/*.md --fix",
+    "lint:fix": "eslint . --fix && markdownlint-cli2 contents/**/*.md --fix && prettier --write contents/**/*.md --print-width 60",
     "prepare": "husky install"
   },
   "keywords": [],

@@ -10,12 +10,14 @@ A `for` statement looks as follows:
 
 ```javascript
 for (initialization; condition; afterthought)
-  statement
 ```
 
 The initializing expression can initialize multiple loop counters, so we can do like this when we have more:
 
 ```javascript
-for (let left = 0, right = s1.length; right < s2.length; left++, right++) {
-}
+for (
+  let left = 0, right = s1.length;
+  right < s2.length;
+  left++, right++
+)
 ```

@@ -10,10 +10,9 @@ The `localeCompare()` method of `String` values returns a number indicating whet
 or is the same as the given string in sort order.
 
 ```javascript
-"a".localeCompare("c"); // -1
-"orange".localeCompare("apple"); // 1
-
-["orange", "Banana", "cherry", "Apple"].sort((a, b) =>
-  a.localeCompare(b, "en", { sensitivity: "base" })
-); // [ 'Apple', 'Banana', 'cherry', 'orange' ]
+'a'.localeCompare('c') // -1
+'orange'.localeCompare('apple') // 1
+;['orange', 'Banana', 'cherry', 'Apple'].sort((a, b) =>
+  a.localeCompare(b, 'en', { sensitivity: 'base' })
+) // [ 'Apple', 'Banana', 'cherry', 'orange' ]
 ```
