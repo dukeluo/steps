@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
-import { readdirSync, readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { join, resolve, sep } from 'node:path'
 
 import { del, put } from '@vercel/blob'
 import { Kysely } from 'kysely'
@@ -32,12 +32,36 @@ function calculateStepHashDigest(pathname: string) {
   return createHash('sha256').update(readFileSync(pathname, 'utf8')).digest('hex')
 }
 
+function getAllFilesInFolder(folderPath: string) {
+  const files = readdirSync(folderPath)
+  const filePaths: string[] = []
+  const ignoredFolder = ['.git', 'node_modules', 'dist']
+
+  files.forEach((file) => {
+    if (ignoredFolder.includes(file)) {
+      return
+    }
+
+    const filePath = join(folderPath, file)
+    const stat = statSync(filePath)
+
+    if (stat.isFile()) {
+      filePaths.push(filePath.replace(join(resolve('./'), sep), ''))
+    } else if (stat.isDirectory()) {
+      const nestedFiles = getAllFilesInFolder(filePath)
+      filePaths.push(...nestedFiles)
+    }
+  })
+
+  return filePaths
+}
+
 export async function createActions(
   db: Kysely<PostgresDatabase>,
   pathPattern: string
 ): Promise<[AddStepAction[], DeleteStepAction[]]> {
   const steps = await findAllSteps(db)
-  const matched = micromatch.match(readdirSync(resolve('./')), pathPattern)
+  const matched = micromatch.match(getAllFilesInFolder(resolve('./')), pathPattern)
   const noModified = []
   const toBeAdded: AddStepAction[] = []
   const toBeDeleted: DeleteStepAction[] = []
