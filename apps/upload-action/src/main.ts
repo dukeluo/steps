@@ -10,11 +10,13 @@ export async function run(): Promise<void> {
     const db = createKysely<PostgresDatabase>()
     const [toBeAdded, toBeDeleted] = await createActions(db, pathPattern)
 
-    info(`Steps will be inserted: ${JSON.stringify(toBeAdded)}`)
-    info(`Steps will be deleted: ${JSON.stringify(toBeDeleted)}`)
-
+    info(`Steps are going to be added: ${JSON.stringify(toBeAdded)}`)
     await addSteps(db, toBeAdded)
+    info('Done')
+
+    info(`Steps are going to be deleted: ${JSON.stringify(toBeDeleted)}`)
     await deleteSteps(db, toBeDeleted)
+    info('Done')
   } catch (e) {
     if (e instanceof Error) {
       debug(e.stack ?? '')
