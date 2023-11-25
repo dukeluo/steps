@@ -15,12 +15,9 @@ class FileMigrationProvider {
 
   async getMigrations(): Promise<Record<string, Migration>> {
     const files = await readdir(this.#folder)
-    const migrations = files.reduce(
-      async (acc, file) => ({
-        ...acc,
-        [file]: (await import(join(this.#folder, file))) as Migration,
-      }),
-      {}
+    const migrations = await files.reduce<Promise<Record<string, Migration>>>(
+      async (acc, file) => ({ ...(await acc), [file]: (await import(join(this.#folder, file))) as Migration }),
+      Promise.resolve({})
     )
 
     return migrations
