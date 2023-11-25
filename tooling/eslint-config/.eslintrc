@@ -4,18 +4,23 @@
     "es6": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "import", "simple-import-sort"],
+  "plugins": ["@typescript-eslint", "prettier", "import", "simple-import-sort", "functional"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:functional/external-typescript-recommended",
+    "plugin:functional/lite",
+    "plugin:functional/stylistic"
   ],
   "ignorePatterns": ["node_modules/", "dist/"],
   "parserOptions": {
     "sourceType": "module",
-    "modules": true
+    "modules": true,
+    "project": true
   },
   "settings": {
     "import/parsers": {

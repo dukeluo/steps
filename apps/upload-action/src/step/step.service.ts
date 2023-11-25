@@ -32,28 +32,26 @@ function calculateStepHashDigest(pathname: string) {
   return createHash('sha256').update(readFileSync(pathname, 'utf8')).digest('hex')
 }
 
-function getAllFilesInFolder(folderPath: string) {
+function getAllFilesInFolder(folderPath: string): readonly string[] {
   const files = readdirSync(folderPath)
-  const filePaths: string[] = []
-  const ignoredFolder = ['.git', 'node_modules', 'dist']
+  const ignoredFolders = ['.git', 'node_modules', 'dist']
 
-  files.forEach((file) => {
-    if (ignoredFolder.includes(file)) {
-      return
+  return files.reduce((filePaths: readonly string[], file: string) => {
+    if (ignoredFolders.includes(file)) {
+      return filePaths
     }
 
     const filePath = join(folderPath, file)
-    const stat = statSync(filePath)
+    const fileStat = statSync(filePath)
 
-    if (stat.isFile()) {
-      filePaths.push(filePath.replace(join(resolve('./'), sep), ''))
-    } else if (stat.isDirectory()) {
-      const nestedFiles = getAllFilesInFolder(filePath)
-      filePaths.push(...nestedFiles)
+    if (fileStat.isFile()) {
+      return [...filePaths, filePath.replace(join(resolve('./'), sep), '')]
+    } else if (fileStat.isDirectory()) {
+      return [...filePaths, ...getAllFilesInFolder(filePath)]
     }
-  })
 
-  return filePaths
+    return filePaths
+  }, [])
 }
 
 export async function createActions(
@@ -62,57 +60,51 @@ export async function createActions(
 ): Promise<[AddStepAction[], DeleteStepAction[]]> {
   const steps = await findAllSteps(db)
   const matched = micromatch.match(getAllFilesInFolder(resolve('./')), pathPattern)
-  const noModified = []
-  const toBeAdded: AddStepAction[] = []
-  const toBeDeleted: DeleteStepAction[] = []
+  const [toBeAdded, noModified] = matched.reduce<[AddStepAction[], string[]]>(
+    ([a, m], pathname) => {
+      const hash = calculateStepHashDigest(pathname)
 
-  for (const pathname of matched) {
-    const hash = calculateStepHashDigest(pathname)
-
-    if (steps.find((step) => step.hash_digest === hash)) {
-      noModified.push(pathname)
-    } else {
-      toBeAdded.push({ pathname, hash })
-    }
-  }
-  for (const step of steps) {
-    if (!noModified.includes(step.pathname)) {
-      toBeDeleted.push({ id: step.id, url: step.file_url })
-    }
-  }
+      return steps.find((step) => step.hash_digest === hash) ? [a, [...m, pathname]] : [[...a, { pathname, hash }], m]
+    },
+    [[], []]
+  )
+  const toBeDeleted = steps.reduce<DeleteStepAction[]>(
+    (d, step) => (noModified.includes(step.pathname) ? d : [...d, { id: step.id, url: step.file_url }]),
+    []
+  )
 
   return [toBeAdded, toBeDeleted]
 }
 
-export async function addSteps(db: Kysely<PostgresDatabase>, actions: AddStepAction[]) {
+export async function addSteps(db: Kysely<PostgresDatabase>, actions: readonly AddStepAction[]) {
   if (!actions.length) return
 
-  for (const action of actions) {
-    const content = readFileSync(action.pathname, 'utf8')
-    const { url } = await put(action.pathname, content, { access: 'public' })
-    const metadata = parseMD(content).metadata as StepMetaData
+  await Promise.all(
+    actions.map(async (action) => {
+      const content = readFileSync(action.pathname, 'utf8')
+      const { url } = await put(action.pathname, content, { access: 'public' })
+      const metadata = parseMD(content).metadata as StepMetaData
 
-    insertStep(db, {
-      pathname: action.pathname,
-      title: metadata.title,
-      category: metadata.category,
-      tags: metadata.tags,
-      created_at: metadata.dateCreated,
-      modified_at: metadata.dateModified,
-      file_url: url,
-      hash_digest: action.hash,
+      return insertStep(db, {
+        pathname: action.pathname,
+        title: metadata.title,
+        category: metadata.category,
+        tags: metadata.tags,
+        created_at: metadata.dateCreated,
+        modified_at: metadata.dateModified,
+        file_url: url,
+        hash_digest: action.hash,
+      })
     })
-  }
+  )
 }
 
-export async function deleteSteps(db: Kysely<PostgresDatabase>, actions: DeleteStepAction[]) {
+export async function deleteSteps(db: Kysely<PostgresDatabase>, actions: readonly DeleteStepAction[]) {
   if (!actions.length) return
 
   await deleteStepsByIds(
     db,
     actions.map((action) => action.id)
   )
-  for (const action of actions) {
-    await del(action.url)
-  }
+  await Promise.all(actions.map((action) => del(action.url)))
 }

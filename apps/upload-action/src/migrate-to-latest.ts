@@ -5,20 +5,23 @@ import { join, resolve } from 'node:path'
 import { createKysely } from '@vercel/postgres-kysely'
 import { Migration, Migrator } from 'kysely'
 
+// eslint-disable-next-line functional/no-classes
 class FileMigrationProvider {
-  #folder: string
+  readonly #folder: string
 
   constructor(folder: string) {
     this.#folder = folder
   }
 
   async getMigrations(): Promise<Record<string, Migration>> {
-    const migrations: Record<string, Migration> = {}
     const files = await readdir(this.#folder)
-
-    for await (const file of files) {
-      migrations[file] = await import(join(this.#folder, file))
-    }
+    const migrations = files.reduce(
+      async (acc, file) => ({
+        ...acc,
+        [file]: (await import(join(this.#folder, file))) as Migration,
+      }),
+      {}
+    )
 
     return migrations
   }
@@ -28,6 +31,7 @@ async function migrateToLatest() {
   const db = createKysely()
 
   // https://github.com/vercel/storage/issues/325#issuecomment-1680858882
+  // eslint-disable-next-line functional/immutable-data
   Object.defineProperty(db.getExecutor().adapter, 'supportsTransactionalDdl', () => false)
 
   const migrator = new Migrator({
@@ -37,6 +41,7 @@ async function migrateToLatest() {
 
   const { error, results } = await migrator.migrateToLatest()
 
+  // eslint-disable-next-line functional/no-return-void
   results?.forEach((it) => {
     if (it.status === 'Success') {
       console.log(`migration "${it.migrationName}" was executed successfully`)
@@ -54,4 +59,4 @@ async function migrateToLatest() {
   await db.destroy()
 }
 
-migrateToLatest()
+void migrateToLatest()
