@@ -1,9 +1,4 @@
 {
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "cSpell.words": [
-    "Insertable",
-    "Kysely",
-    "Updateable"
-  ],
   "eslint.workingDirectories": [{ "mode": "auto" }]
 }
