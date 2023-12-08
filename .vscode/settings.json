@@ -4,5 +4,6 @@
     "Insertable",
     "Kysely",
     "Updateable"
-  ]
+  ],
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }

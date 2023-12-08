@@ -8,6 +8,7 @@
     ".": "./dist/index.js"
   },
   "scripts": {
+    "lint": "eslint .",
     "build": "rm -rf dist && tsc && tsc-alias --resolve-full-paths",
     "migrate": "cd dist && node migrate-to-latest.js"
   },
@@ -20,6 +21,7 @@
     "parse-md": "^3.0.3"
   },
   "devDependencies": {
+    "@steps/eslint-config": "workspace:^",
     "@steps/ts-config": "workspace:^",
     "@types/micromatch": "^4.0.4",
     "tsc-alias": "^1.8.8"

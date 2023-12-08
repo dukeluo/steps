@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "node": true,
     "es6": true
@@ -29,7 +30,7 @@
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true,
-        "project": ["apps/*/tsconfig.json", "tooling/*/tsconfig.json"]
+        "project": "tsconfig.json"
       },
       "node": true
     }

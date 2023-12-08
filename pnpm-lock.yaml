@@ -14,9 +14,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^18.4.2
         version: 18.4.2
-      '@steps/eslint-config':
-        specifier: workspace:^
-        version: link:tooling/eslint-config
       eslint:
         specifier: ^8.53.0
         version: 8.53.0
@@ -54,6 +51,9 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
     devDependencies:
+      '@steps/eslint-config':
+        specifier: workspace:^
+        version: link:../../tooling/eslint-config
       '@steps/ts-config':
         specifier: workspace:^
         version: link:../../tooling/ts-config
