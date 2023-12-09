@@ -7,6 +7,7 @@
     "website": "pnpm --filter @steps/website",
     "dev": "pnpm --recursive --parallel --stream run dev",
     "build": "pnpm --recursive --parallel --stream run build",
+    "clean": "pnpm --recursive --parallel --stream run clean",
     "lint": "pnpm --recursive --parallel --stream run lint && markdownlint-cli2 contents/**/*.md",
     "lint:fix": "pnpm --recursive --parallel --stream run lint:fix && markdownlint-cli2 contents/**/*.md --fix && prettier --write contents/**/*.md --print-width 60",
     "prepare": "husky install"

@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsc && tsc-alias --resolve-full-paths",
+    "clean": "tsc --build --clean && rm -rf dist",
     "migrate": "cd dist && node migrate-to-latest.js"
   },
   "dependencies": {
