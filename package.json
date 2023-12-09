@@ -4,9 +4,11 @@
   "description": "",
   "scripts": {
     "action": "pnpm --filter @steps/upload-action",
+    "website": "pnpm --filter @steps/website",
+    "dev": "pnpm --recursive --parallel --stream run dev",
     "build": "pnpm --recursive --parallel --stream run build",
     "lint": "pnpm --recursive --parallel --stream run lint && markdownlint-cli2 contents/**/*.md",
-    "lint:fix": "eslint . --fix && markdownlint-cli2 contents/**/*.md --fix && prettier --write contents/**/*.md --print-width 60",
+    "lint:fix": "pnpm --recursive --parallel --stream run lint:fix && markdownlint-cli2 contents/**/*.md --fix && prettier --write contents/**/*.md --print-width 60",
     "prepare": "husky install"
   },
   "keywords": [],

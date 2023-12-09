@@ -9,7 +9,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "rm -rf dist && tsc && tsc-alias --resolve-full-paths",
+    "lint:fix": "eslint . --fix",
+    "build": "tsc && tsc-alias --resolve-full-paths",
     "migrate": "cd dist && node migrate-to-latest.js"
   },
   "dependencies": {
