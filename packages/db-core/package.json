@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsc && tsc-alias --resolve-full-paths",
-    "clean": "tsc --build --clean && rm -rf dist"
+    "clean": "tsc --build --clean && rm -rf dist",
+    "prepare": "pnpm build"
   },
   "dependencies": {
     "@vercel/postgres-kysely": "^0.6.0",
