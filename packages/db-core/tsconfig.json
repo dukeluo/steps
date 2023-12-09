@@ -1,0 +1,15 @@
+{
+  "extends": "@steps/ts-config/base.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "sourceMap": false,
+    "declaration": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "include": ["src"]
+}

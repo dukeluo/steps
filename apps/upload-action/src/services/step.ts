@@ -2,13 +2,11 @@ import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, resolve, sep } from 'node:path'
 
+import { Database, deleteStepsByIds, findAllSteps, insertStep } from '@steps/db-core'
 import { del, put } from '@vercel/blob'
 import { Kysely } from 'kysely'
 import micromatch from 'micromatch'
 import parseMD from 'parse-md'
-
-import { PostgresDatabase } from '~/postgres.storage'
-import { deleteStepsByIds, findAllSteps, insertStep } from '~/step/step.repository'
 
 interface AddStepAction {
   pathname: string
@@ -55,7 +53,7 @@ function getAllFilesInFolder(folderPath: string): readonly string[] {
 }
 
 export async function createActions(
-  db: Kysely<PostgresDatabase>,
+  db: Kysely<Database>,
   pathPattern: string
 ): Promise<[AddStepAction[], DeleteStepAction[]]> {
   const steps = await findAllSteps(db)
@@ -76,7 +74,7 @@ export async function createActions(
   return [toBeAdded, toBeDeleted]
 }
 
-export async function addSteps(db: Kysely<PostgresDatabase>, actions: readonly AddStepAction[]) {
+export async function addSteps(db: Kysely<Database>, actions: readonly AddStepAction[]) {
   if (!actions.length) return
 
   await Promise.all(
@@ -99,7 +97,7 @@ export async function addSteps(db: Kysely<PostgresDatabase>, actions: readonly A
   )
 }
 
-export async function deleteSteps(db: Kysely<PostgresDatabase>, actions: readonly DeleteStepAction[]) {
+export async function deleteSteps(db: Kysely<Database>, actions: readonly DeleteStepAction[]) {
   if (!actions.length) return
 
   await deleteStepsByIds(

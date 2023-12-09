@@ -1,0 +1,25 @@
+{
+  "name": "@steps/db-core",
+  "version": "0.0.0",
+  "private": true,
+  "description": "sharable database-related functionality",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "tsc && tsc-alias --resolve-full-paths"
+  },
+  "dependencies": {
+    "@vercel/postgres-kysely": "^0.6.0",
+    "kysely": "^0.26.3"
+  },
+  "devDependencies": {
+    "@steps/eslint-config": "workspace:^",
+    "@steps/ts-config": "workspace:^",
+    "tsc-alias": "^1.8.8"
+  }
+}

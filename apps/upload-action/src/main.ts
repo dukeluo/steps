@@ -1,13 +1,13 @@
 import { debug, getInput, info, setFailed } from '@actions/core'
+import { Database } from '@steps/db-core'
 import { createKysely } from '@vercel/postgres-kysely'
 
-import { PostgresDatabase } from '~/postgres.storage'
-import { addSteps, createActions, deleteSteps } from '~/step/step.service'
+import { addSteps, createActions, deleteSteps } from '~/services/step'
 
 export async function run(): Promise<void> {
   try {
     const pathPattern: string = getInput('path')
-    const db = createKysely<PostgresDatabase>()
+    const db = createKysely<Database>()
     const [toBeAdded, toBeDeleted] = await createActions(db, pathPattern)
 
     info(`Steps are going to be added: ${JSON.stringify(toBeAdded)}`)

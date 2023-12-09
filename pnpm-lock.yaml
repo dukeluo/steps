@@ -35,6 +35,9 @@ importers:
       '@actions/core':
         specifier: ^1.10.1
         version: 1.10.1
+      '@steps/db-core':
+        specifier: workspace:^
+        version: link:../../packages/db-core
       '@vercel/blob':
         specifier: ^0.14.1
         version: 0.14.1
@@ -106,6 +109,25 @@ importers:
       tailwindcss:
         specifier: ^3.3.0
         version: 3.3.6
+
+  packages/db-core:
+    dependencies:
+      '@vercel/postgres-kysely':
+        specifier: ^0.6.0
+        version: 0.6.0(kysely@0.26.3)
+      kysely:
+        specifier: ^0.26.3
+        version: 0.26.3
+    devDependencies:
+      '@steps/eslint-config':
+        specifier: workspace:^
+        version: link:../../tooling/eslint-config
+      '@steps/ts-config':
+        specifier: workspace:^
+        version: link:../../tooling/ts-config
+      tsc-alias:
+        specifier: ^1.8.8
+        version: 1.8.8
 
   tooling/eslint-config:
     devDependencies:
