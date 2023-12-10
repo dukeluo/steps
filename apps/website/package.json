@@ -12,6 +12,7 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@steps/db-core": "workspace:^",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"
