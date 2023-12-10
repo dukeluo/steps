@@ -2,9 +2,8 @@ import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, resolve, sep } from 'node:path'
 
-import { Database, deleteStepsByIds, findAllSteps, insertStep } from '@steps/db-core'
+import client, { deleteStepsByIds, findAllSteps, insertStep } from '@steps/db-core'
 import { del, put } from '@vercel/blob'
-import { Kysely } from 'kysely'
 import micromatch from 'micromatch'
 import parseMD from 'parse-md'
 
@@ -53,7 +52,7 @@ function getAllFilesInFolder(folderPath: string): readonly string[] {
 }
 
 export async function createActions(
-  db: Kysely<Database>,
+  db: typeof client,
   pathPattern: string
 ): Promise<[AddStepAction[], DeleteStepAction[]]> {
   const steps = await findAllSteps(db)
@@ -74,7 +73,7 @@ export async function createActions(
   return [toBeAdded, toBeDeleted]
 }
 
-export async function addSteps(db: Kysely<Database>, actions: readonly AddStepAction[]) {
+export async function addSteps(db: typeof client, actions: readonly AddStepAction[]) {
   if (!actions.length) return
 
   await Promise.all(
@@ -97,7 +96,7 @@ export async function addSteps(db: Kysely<Database>, actions: readonly AddStepAc
   )
 }
 
-export async function deleteSteps(db: Kysely<Database>, actions: readonly DeleteStepAction[]) {
+export async function deleteSteps(db: typeof client, actions: readonly DeleteStepAction[]) {
   if (!actions.length) return
 
   await deleteStepsByIds(

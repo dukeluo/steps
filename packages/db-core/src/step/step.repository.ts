@@ -1,6 +1,6 @@
 import { Kysely } from 'kysely'
 
-import { Database } from '~/index'
+import { Database } from '~/db'
 import { InsertableStepRow, StepRow } from '~/step/step.table'
 
 export async function insertStep(db: Kysely<Database>, step: Readonly<InsertableStepRow>): Promise<StepRow> {
