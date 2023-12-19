@@ -1,18 +1,24 @@
-import { getAllSteps } from '@/utils/step'
+import { allSteps, Step } from 'contentlayer/generated'
+import Link from 'next/link'
 
-export const revalidate = 86400
-
-export default async function Home() {
-  const steps = await getAllSteps()
-
+export default function Home() {
   return (
     <main>
       <div className="grid gap-8 grid-cols-1">
-        {steps.map((step) => (
-          <div key={step.id} className="border border-gray-200 rounded-lg">
-            <div className="bg-gray-100 px-4 py-2 font-medium">
-              <a>{step.title}</a>
-            </div>
+        {allSteps.map((step: Readonly<Step>) => (
+          <div className="mb-8" key={step.url}>
+            <h2 className="text-xl">
+              <Link href={step.url} className="text-blue-700 hover:text-blue-900">
+                {step.title}
+              </Link>
+            </h2>
+            <time dateTime={step.dateCreated} className="block mb-2 text-xs text-gray-600">
+              {new Date(step.dateCreated).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
           </div>
         ))}
       </div>

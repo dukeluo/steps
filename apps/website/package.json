@@ -12,10 +12,11 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
-    "@steps/db-core": "workspace:^",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "contentlayer": "^0.3.4",
+    "next-contentlayer": "^0.3.4"
   },
   "devDependencies": {
     "@steps/eslint-config": "workspace:^",
@@ -28,5 +29,10 @@
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0"
+  },
+  "overrides": {
+    "next-contentlayer": {
+      "next": "14.0.4"
+    }
   }
 }
