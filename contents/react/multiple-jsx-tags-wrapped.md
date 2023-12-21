@@ -1,5 +1,5 @@
 ---
-title: Why do multiple JSX tags need to be wrapped?
+title: Why do multiple JSX tags need to be wrapped
 category: react
 tags: [jsx]
 dateCreated: 2023-09-23

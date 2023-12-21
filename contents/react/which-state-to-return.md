@@ -1,5 +1,5 @@
 ---
-title: How does React know which state to return?
+title: How does React know which state to return
 category: react
 tags: [hooks, state]
 dateCreated: 2023-10-07

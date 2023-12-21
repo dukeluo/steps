@@ -1,5 +1,5 @@
 ---
-title: What's the difference between a plugin and a config in ESLint?
+title: What's the difference between a plugin and a config in ESLint
 category: tool
 tags: [eslint]
 dateCreated: 2023-09-26
