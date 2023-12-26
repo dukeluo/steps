@@ -1,6 +1,8 @@
 import { allSteps, Step } from 'contentlayer/generated'
 import Link from 'next/link'
 
+import { formatLocally } from '@/utils/date'
+
 export default function Home() {
   return (
     <main>
@@ -13,11 +15,7 @@ export default function Home() {
               </Link>
             </h2>
             <time dateTime={step.dateCreated} className="block mb-2 text-xs text-gray-600">
-              {new Date(step.dateCreated).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {formatLocally(step.dateCreated)}
             </time>
           </div>
         ))}

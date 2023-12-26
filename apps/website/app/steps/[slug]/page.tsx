@@ -2,6 +2,8 @@ import { allSteps, Step } from 'contentlayer/generated'
 import parse from 'html-react-parser'
 import { notFound } from 'next/navigation'
 
+import { formatLocally, formatRelative } from '@/utils/date'
+
 export default function Step({ params }: Readonly<{ params: { slug: string } }>) {
   const { slug } = params
 
@@ -11,6 +13,20 @@ export default function Step({ params }: Readonly<{ params: { slug: string } }>)
 
   return (
     <article className="max-w-sm md:max-w-3xl lg:max-w-4xl mx-auto prose">
+      <p className="text-sm text-slate-500">
+        Created at{' '}
+        <time dateTime={step.dateCreated} title={formatLocally(step.dateCreated)}>
+          {formatRelative(step.dateCreated)}
+        </time>
+        {step.dateModified && (
+          <>
+            , modified at{' '}
+            <time dateTime={step.dateModified} title={formatLocally(step.dateModified)}>
+              {formatRelative(step.dateModified)}
+            </time>
+          </>
+        )}
+      </p>
       <h1>{step.title}</h1>
       {parse(step.body.html)}
     </article>
