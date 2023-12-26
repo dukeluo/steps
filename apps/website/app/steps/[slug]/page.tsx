@@ -1,4 +1,5 @@
 import { allSteps, Step } from 'contentlayer/generated'
+import parse from 'html-react-parser'
 
 export default function Step({ params }: Readonly<{ params: { slug: string } }>) {
   const { slug } = params
@@ -10,7 +11,7 @@ export default function Step({ params }: Readonly<{ params: { slug: string } }>)
   return (
     <div>
       <h1>{step.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: step.body.html }} />
+      <article className="prose">{parse(step.body.html)}</article>
     </div>
   )
 }

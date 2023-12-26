@@ -12,15 +12,17 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
-    "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
     "contentlayer": "^0.3.4",
-    "next-contentlayer": "^0.3.4"
+    "html-react-parser": "^5.0.11",
+    "next": "14.0.4",
+    "next-contentlayer": "^0.3.4",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@steps/eslint-config": "workspace:^",
     "@steps/ts-config": "workspace:^",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
