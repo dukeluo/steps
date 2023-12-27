@@ -12,7 +12,7 @@ export default function Step({ params }: Readonly<{ params: { slug: string } }>)
   if (!step) return notFound()
 
   return (
-    <article className="max-w-sm md:max-w-3xl lg:max-w-4xl mx-auto prose">
+    <article className="max-w-full prose">
       <p className="text-sm text-slate-500">
         Created at{' '}
         <time dateTime={step.dateCreated} title={formatLocally(step.dateCreated)}>
