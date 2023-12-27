@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import rehypeHighlight from 'rehype-highlight'
 
 const Step = defineDocumentType(() => ({
   name: 'Step',
@@ -42,4 +43,5 @@ const Step = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: '../../contents',
   documentTypes: [Step],
+  markdown: { rehypePlugins: [rehypeHighlight] },
 })
