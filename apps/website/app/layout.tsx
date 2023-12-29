@@ -29,7 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-theme="wireframe">
       <body className="min-h-screen">
-        <main className="max-w-sm md:max-w-3xl lg:max-w-4xl mx-auto py-20 px-4">{children}</main>
+        <main className="mx-auto max-w-sm px-4 py-20 md:max-w-3xl lg:max-w-4xl">{children}</main>
       </body>
     </html>
   )

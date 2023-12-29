@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": ["./node_modules/@steps/eslint-config/.eslintrc", "next/core-web-vitals"]
+  "extends": ["./node_modules/@steps/eslint-config/.eslintrc", "next/core-web-vitals", "plugin:tailwindcss/recommended"]
 }
