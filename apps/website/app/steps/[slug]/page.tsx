@@ -13,7 +13,7 @@ export default function Step({ params }: Readonly<{ params: { slug: string } }>)
 
   return (
     <article className="max-w-full prose">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-accent">
         Created at{' '}
         <time dateTime={step.dateCreated} title={formatLocally(step.dateCreated)}>
           {formatRelative(step.dateCreated)}

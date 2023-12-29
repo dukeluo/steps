@@ -11,7 +11,7 @@ export default function Home() {
           <h2 className="text-xl">
             <Link href={step.url}>{step.title}</Link>
           </h2>
-          <time dateTime={step.dateCreated} className="text-sm text-slate-500">
+          <time dateTime={step.dateCreated} className="text-sm text-accent">
             {formatLocally(step.dateCreated)}
           </time>
         </article>
