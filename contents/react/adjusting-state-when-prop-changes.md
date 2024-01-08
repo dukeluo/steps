@@ -57,7 +57,8 @@ function List({ items }) {
   const [isReverse, setIsReverse] = useState(false)
   const [selectedId, setSelectedId] = useState(null)
   // ✅ Best: Calculate everything during rendering
-  const selection = items.find((item) => item.id === selectedId) ?? null
+  const selection =
+    items.find((item) => item.id === selectedId) ?? null
   // ...
 }
 ```
