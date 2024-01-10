@@ -1,9 +1,9 @@
 import { allSteps } from 'contentlayer/generated'
 import { notFound } from 'next/navigation'
 
-import { StepCategories } from '@/app/components/stepCategories'
-import { StepInfo } from '@/app/components/stepInfo'
-import { getCategories } from '@/app/utils/step'
+import { StepCategories } from '@/components/stepCategories'
+import { StepInfo } from '@/components/stepInfo'
+import { getCategories } from '@/utils/step'
 
 export default function Category({ params }: Readonly<{ params: { slug: string } }>) {
   const { slug: category } = params

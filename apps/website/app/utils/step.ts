@@ -1,6 +1,6 @@
 import { allSteps } from 'contentlayer/generated'
 
-import { CATEGORY_ALL } from '@/app/utils/constants'
+import { CATEGORY_ALL } from '@/utils/constants'
 
 export function getCategories() {
   const stepCategories = allSteps.reduce(

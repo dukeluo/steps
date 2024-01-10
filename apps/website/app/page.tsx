@@ -1,8 +1,8 @@
 import { allSteps } from 'contentlayer/generated'
 
-import { StepCategories } from '@/app/components/stepCategories'
-import { StepInfo } from '@/app/components/stepInfo'
-import { getCategories } from '@/app/utils/step'
+import { StepCategories } from '@/components/stepCategories'
+import { StepInfo } from '@/components/stepInfo'
+import { getCategories } from '@/utils/step'
 
 export default function Home() {
   const categories = getCategories()

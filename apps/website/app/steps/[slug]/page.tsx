@@ -2,7 +2,7 @@ import { allSteps, Step } from 'contentlayer/generated'
 import parse from 'html-react-parser'
 import { notFound } from 'next/navigation'
 
-import { formatLocally, formatRelative } from '@/app/utils/date'
+import { formatLocally, formatRelative } from '@/utils/date'
 
 export default function Step({ params }: Readonly<{ params: { slug: string } }>) {
   const { slug } = params
