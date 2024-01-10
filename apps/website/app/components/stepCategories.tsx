@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { CATEGORY_ALL } from '@/utils/constants'
+import { CATEGORY_ALL } from '@/app/utils/constants'
 
 interface StepCategoriesProps {
   items: string[]

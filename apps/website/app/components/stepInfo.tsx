@@ -1,7 +1,7 @@
 import { Step } from 'contentlayer/generated'
 import Link from 'next/link'
 
-import { formatLocally } from '@/utils/date'
+import { formatLocally } from '@/app/utils/date'
 
 interface StepInfoProps {
   step: Step

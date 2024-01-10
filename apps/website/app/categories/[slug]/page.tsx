@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { StepCategories } from '@/app/components/stepCategories'
 import { StepInfo } from '@/app/components/stepInfo'
-import { getCategories } from '@/utils/step'
+import { getCategories } from '@/app/utils/step'
 
 export default function Category({ params }: Readonly<{ params: { slug: string } }>) {
   const { slug: category } = params
