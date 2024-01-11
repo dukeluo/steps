@@ -9,7 +9,7 @@ interface StepInfoProps {
 
 export function StepInfo({ step }: Readonly<StepInfoProps>) {
   return (
-    <article className="mb-8">
+    <article className="mb-8 last:mb-0">
       <h2 className="text-xl">
         <Link href={step.url}>{step.title}</Link>
       </h2>

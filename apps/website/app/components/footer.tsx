@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin, FaStackOverflow, FaXTwitter } from 'react-icons/f
 
 export function Footer() {
   return (
-    <footer className="footer mt-4 items-center border-t py-6">
+    <footer className="footer mt-8 items-center border-t py-6">
       <aside className="grid-flow-col items-center">
         <p>© 2024 Huan Luo</p>
       </aside>
