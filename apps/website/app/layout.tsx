@@ -2,6 +2,8 @@ import '@/styles/globals.css'
 
 import type { Metadata } from 'next'
 
+import { Footer } from '@/components/footer'
+
 export const metadata: Metadata = {
   title: 'steps',
   description: 'Something I learned today',
@@ -29,7 +31,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-theme="wireframe">
       <body className="min-h-screen">
-        <main className="mx-auto max-w-sm px-4 py-20 md:max-w-3xl lg:max-w-4xl">{children}</main>
+        <div className="mx-auto max-w-sm px-4 pt-20 md:max-w-3xl lg:max-w-4xl">
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   )
