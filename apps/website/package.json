@@ -21,6 +21,8 @@
     "react-icons": "^5.0.0"
   },
   "devDependencies": {
+    "@docsearch/css": "^3.5.2",
+    "@docsearch/react": "^3.5.2",
     "@steps/eslint-config": "workspace:^",
     "@steps/ts-config": "workspace:^",
     "@tailwindcss/typography": "^0.5.10",
