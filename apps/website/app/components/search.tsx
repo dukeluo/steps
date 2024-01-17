@@ -52,7 +52,7 @@ export function Search() {
         onClick={openModal}
       >
         <FaSistrix className="mr-3" />
-        Quick search...
+        Quick search steps...
         <span className="ml-auto flex">
           <kbd className="mr-1 inline-flex h-5 w-5 items-center justify-center rounded bg-accent">⌘</kbd>
           <kbd className="inline-flex h-5 w-5 items-center justify-center rounded bg-accent">K</kbd>
@@ -66,6 +66,7 @@ export function Search() {
             indexName={process.env.NEXT_PUBLIC_DOC_SEARCH_INDEX_NAME ?? ''}
             insights={true}
             initialScrollY={window.scrollY}
+            placeholder="Search steps"
             onClose={closeModal}
           />,
           document.body
