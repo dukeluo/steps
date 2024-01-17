@@ -1,9 +1,8 @@
 /* eslint-disable functional/no-return-void */
 'use client'
 
-import Head from 'next/head'
 import { lazy, useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { createPortal, preconnect } from 'react-dom'
 import { FaSistrix } from 'react-icons/fa6'
 
 const options = {
@@ -50,11 +49,10 @@ export function Search() {
     }
   }, [])
 
+  preconnect(`https://${options.appId}-dsn.algolia.net`, { crossOrigin: 'anonymous' })
+
   return (
     <>
-      <Head key="algolia">
-        <link rel="preconnect" href={`https://${options.appId}-dsn.algolia.net`} crossOrigin="anonymous" />
-      </Head>
       <button
         className="flex w-full items-center rounded-lg border bg-base-200 px-3 py-2 opacity-60"
         onClick={openModal}
