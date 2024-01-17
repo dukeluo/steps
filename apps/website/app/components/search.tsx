@@ -7,9 +7,9 @@ import { createPortal } from 'react-dom'
 import { FaSistrix } from 'react-icons/fa6'
 
 const options = {
-  appId: 'R2IYF7ETH7',
-  apiKey: '599cec31baffa4868cae4e79f180729b',
-  indexName: 'docsearch',
+  appId: '9RRGYETQ8H',
+  apiKey: 'bce7f3d7a28d2f011b4fdfbf5e641be8',
+  indexName: 'steps-shaiwang',
 }
 
 const LazyDocSearchModal = lazy(() =>
@@ -68,7 +68,7 @@ export function Search() {
       </button>
       {openSearch &&
         createPortal(
-          <LazyDocSearchModal {...options} initialScrollY={window.scrollY} onClose={closeModal} />,
+          <LazyDocSearchModal {...options} insights={true} initialScrollY={window.scrollY} onClose={closeModal} />,
           document.body
         )}
     </>
