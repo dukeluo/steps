@@ -5,12 +5,6 @@ import { lazy, useEffect, useState } from 'react'
 import { createPortal, preconnect } from 'react-dom'
 import { FaSistrix } from 'react-icons/fa6'
 
-const options = {
-  appId: '9RRGYETQ8H',
-  apiKey: 'bce7f3d7a28d2f011b4fdfbf5e641be8',
-  indexName: 'steps-shaiwang',
-}
-
 const LazyDocSearchModal = lazy(() =>
   import('@docsearch/react').then(({ DocSearchModal }) => ({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -49,7 +43,7 @@ export function Search() {
     }
   }, [])
 
-  preconnect(`https://${options.appId}-dsn.algolia.net`, { crossOrigin: 'anonymous' })
+  preconnect(`https://${process.env.NEXT_PUBLIC_DOC_SEARCH_APP_ID}-dsn.algolia.net`, { crossOrigin: 'anonymous' })
 
   return (
     <>
@@ -66,7 +60,14 @@ export function Search() {
       </button>
       {openSearch &&
         createPortal(
-          <LazyDocSearchModal {...options} insights={true} initialScrollY={window.scrollY} onClose={closeModal} />,
+          <LazyDocSearchModal
+            appId={process.env.NEXT_PUBLIC_DOC_SEARCH_APP_ID ?? ''}
+            apiKey={process.env.NEXT_PUBLIC_DOC_SEARCH_API_KEY ?? ''}
+            indexName={process.env.NEXT_PUBLIC_DOC_SEARCH_INDEX_NAME ?? ''}
+            insights={true}
+            initialScrollY={window.scrollY}
+            onClose={closeModal}
+          />,
           document.body
         )}
     </>
