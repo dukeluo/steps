@@ -1,12 +1,12 @@
 ---
 title: Strategy pattern
-category: design_pattern
+category: 'design pattern'
 tags: [pattern]
 dateCreated: 2024-01-22
 dateModified:
 ---
 
-Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class,
+Strategy pattern allows you define a family of algorithms, put each of them into a separate class,
 and make their objects interchangeable. This pattern allows algorithm changes to be independent of the customers
 who use the algorithms.
 
