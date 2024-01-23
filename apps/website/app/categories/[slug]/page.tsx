@@ -7,7 +7,7 @@ import { StepInfo } from '@/components/stepInfo'
 import { getCategories } from '@/utils/step'
 
 export default function Category({ params }: Readonly<{ params: { slug: string } }>) {
-  const { slug: category } = params
+  const category = params.slug.replaceAll('-', ' ')
   const categories = getCategories()
 
   if (!categories.find((c) => c === category)) return notFound()

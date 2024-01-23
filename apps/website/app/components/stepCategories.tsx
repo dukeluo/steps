@@ -18,11 +18,13 @@ export function StepCategories({ items }: Readonly<StepCategoriesProps>) {
         <span
           key={item}
           className={`badge badge-lg m-1 ${
-            pathname.includes(item) || (item === CATEGORY_ALL && pathname === '/') ? 'badge-secondary' : ''
+            pathname.replaceAll('-', ' ').includes(item) || (item === CATEGORY_ALL && pathname === '/')
+              ? 'badge-secondary'
+              : ''
           }`}
         >
           <span>
-            <Link href={item === CATEGORY_ALL ? '/' : `/categories/${item}`}>{item}</Link>
+            <Link href={item === CATEGORY_ALL ? '/' : `/categories/${item.replaceAll(' ', '-')}`}>{item}</Link>
           </span>
         </span>
       ))}
