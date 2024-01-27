@@ -1,6 +1,6 @@
 import { allSteps } from 'contentlayer/generated'
 
-import { CATEGORY_ALL } from '@/utils/constants'
+import { CATEGORY_ALL, PAGE_SIZE } from '@/utils/constants'
 
 export function getCategories() {
   const stepCategories = allSteps.reduce(
@@ -9,4 +9,12 @@ export function getCategories() {
   )
 
   return [CATEGORY_ALL, ...stepCategories]
+}
+
+export function getTotalPages() {
+  return Math.ceil(allSteps.length / PAGE_SIZE)
+}
+
+export function getStepsByPage(page: number) {
+  return allSteps.slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page)
 }

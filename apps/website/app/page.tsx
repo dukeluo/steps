@@ -1,12 +1,14 @@
-import { allSteps } from 'contentlayer/generated'
-
+import { Pagination } from '@/components/pagination'
 import { Search } from '@/components/search'
 import { StepCategories } from '@/components/stepCategories'
 import { StepInfo } from '@/components/stepInfo'
-import { getCategories } from '@/utils/step'
+import { getCategories, getStepsByPage, getTotalPages } from '@/utils/step'
 
-export default function Home() {
+export default function Home({ searchParams }: Readonly<{ searchParams?: { page?: string } }>) {
   const categories = getCategories()
+  const currentPage = Number(searchParams?.page ?? 1)
+  const steps = getStepsByPage(currentPage)
+  const pages = getTotalPages()
 
   return (
     <article>
@@ -14,9 +16,12 @@ export default function Home() {
         <Search />
         <StepCategories items={categories} />
       </header>
-      {allSteps.map((step) => (
+      {steps.map((step) => (
         <StepInfo step={step} key={step._id} />
       ))}
+      <div className="flex justify-center">
+        <Pagination totalPages={pages} currentPage={currentPage} />
+      </div>
     </article>
   )
 }
