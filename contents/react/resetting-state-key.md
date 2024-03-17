@@ -1,7 +1,7 @@
 ---
 title: Resetting state with a key
 category: react
-tags: [state]
+tags: [state, key]
 dateCreated: 2023-12-17
 dateModified:
 ---
